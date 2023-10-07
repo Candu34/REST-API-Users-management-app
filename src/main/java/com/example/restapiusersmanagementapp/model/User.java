@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -35,6 +37,11 @@ public class User {
     @Column(name = "status", nullable = false)
     private String status;
 
+    public String changeStatus(){
+        String currentStatus = getStatus().equals("online") ? "offline" : "online";
+        setStatus(currentStatus);
 
+        return currentStatus;
+    }
 
 }
