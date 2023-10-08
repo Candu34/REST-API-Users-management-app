@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,10 +27,11 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "surName", nullable = false)
+    @Column(name = "surName")
     private String surName;
 
     @Column(name = "email", nullable = false, unique = true)
+    @Email
     private String email;
 
     @Column(name = "img_url", nullable = false)

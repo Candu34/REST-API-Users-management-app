@@ -1,6 +1,9 @@
-package com.example.restapiusersmanagementapp.util;
+package com.example.restapiusersmanagementapp.util.exceptions;
 
 
+import com.example.restapiusersmanagementapp.util.exceptions.UserErrorResponse;
+import com.example.restapiusersmanagementapp.util.exceptions.UserExistingEmailException;
+import com.example.restapiusersmanagementapp.util.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,7 +26,7 @@ public class UserExceptionsHandler {
                 System.currentTimeMillis());
 
 
-        return new ResponseEntity<>(userErrorResponse,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(userErrorResponse,HttpStatus.CONFLICT);
     }
 
 }

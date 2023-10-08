@@ -1,4 +1,4 @@
-package com.example.restapiusersmanagementapp.util;
+package com.example.restapiusersmanagementapp.util.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

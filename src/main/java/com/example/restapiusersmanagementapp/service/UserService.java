@@ -2,7 +2,8 @@ package com.example.restapiusersmanagementapp.service;
 
 import com.example.restapiusersmanagementapp.model.User;
 import com.example.restapiusersmanagementapp.repository.UserRepository;
-import com.example.restapiusersmanagementapp.util.UserNotFoundException;
+import com.example.restapiusersmanagementapp.util.exceptions.UserExistingEmailException;
+import com.example.restapiusersmanagementapp.util.exceptions.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,23 +34,23 @@ private final UserRepository userRepository;
 
     @Transactional(readOnly = false)
     public long save(User user){
-       long id = userRepository.save(user).getId();
-       return id;
+        if(userRepository.findByEmail(user.getEmail()) != null)
+            throw new UserExistingEmailException();
+        else {
+            long id = userRepository.save(user).getId();
+            return id;
+        }
     }
 
     @Transactional(readOnly = false)
     public Map<String, String> updateUserStatus(long id){
         Map<String, String> updateResponse= new HashMap<>();
 
-
-
          User userToUpdate = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-
 
          updateResponse.put("id", Long.toString(id));
          updateResponse.put("previos status", userToUpdate.getStatus());
          updateResponse.put("current status", userToUpdate.changeStatus());
-
 
         return updateResponse;
     }
