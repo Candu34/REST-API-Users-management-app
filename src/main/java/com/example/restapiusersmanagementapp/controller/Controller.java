@@ -38,13 +38,10 @@ public class Controller {
        return userService.updateUserStatus(Long.parseLong(id));
     }
 
-//    @ExceptionHandler
-//    private ResponseEntity<UserErrorResponse> exceptionHandler(UserNotFoundException e){
-//        UserErrorResponse response = new UserErrorResponse("Person with this id wasn't found",
-//                System.currentTimeMillis());
-//        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-//    }
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable String id){
 
+    }
 
 
 }

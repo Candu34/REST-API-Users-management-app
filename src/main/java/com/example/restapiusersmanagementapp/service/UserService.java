@@ -55,6 +55,16 @@ private final UserRepository userRepository;
         return updateResponse;
     }
 
+    @Transactional(readOnly = false)
+    public void deleteUser(Long id){
+       Optional<User> userToDelete = userRepository.findById(id);
+        if(userToDelete.isPresent()){
+            userRepository.deleteById(id);
+        }else
+            throw new UserNotFoundException();
+
+    }
+
 
 
 
